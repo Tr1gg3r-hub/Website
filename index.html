@@ -1,0 +1,1986 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RIBEIRO William | Portfolio BTS SIO option SISR</title>
+    <!-- Favicon personnalisé -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23212A3E'/><circle cx='50' cy='50' r='40' fill='%234A6FA5'/><path d='M30,30 L70,30 L70,70 L30,70 Z' stroke='white' stroke-width='5' fill='none'/><circle cx='50' cy='50' r='15' fill='white'/><path d='M50,30 L50,15 M50,70 L50,85 M30,50 L15,50 M70,50 L85,50' stroke='white' stroke-width='4'/></svg>">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            /* Couleurs par défaut (dark mode) */
+            --primary: #4A6FA5;
+            --primary-dark: #3A5A8A;
+            --primary-light: #6B8FC7;
+            --secondary: #212A3E;
+            --accent: #FF7E5F;
+            --text: #F8F9FA;
+            --bg-dark: #1A1E2C;
+            --card-bg: rgba(33, 42, 62, 0.9);
+            --header-bg: rgba(33, 42, 62, 0.95);
+            --footer-bg: rgba(33, 42, 62, 0.95);
+        }
+
+        /* Light mode colors */
+        [data-theme="light"] {
+            --primary: #3A5A8A;
+            --primary-dark: #2C4366;
+            --primary-light: #4A6FA5;
+            --secondary: #E1E5EE;
+            --accent: #E67E60;
+            --text: #2D3748;
+            --bg-dark: #F5F7FA;
+            --card-bg: rgba(173, 216, 230, 0.8);
+            --header-bg: rgba(173, 216, 230, 0.5);
+            --footer-bg: rgba(173, 216, 230, 0.5);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(74, 111, 165, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(255, 126, 95, 0.15) 0%, transparent 50%);
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        /* Scrollbar personnalisée */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--secondary);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-light);
+        }
+
+        /* Conteneurs principaux */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        header {
+            background: var(--header-bg);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+            border-bottom: 1px solid rgba(74, 111, 165, 0.2);
+            transform: translateY(0);
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        header.hidden {
+            transform: translateY(-100%);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo h1 {
+            font-size: 1.8rem;
+            background: linear-gradient(90deg, var(--primary), var(--primary-light));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .logo-icon {
+            color: var(--primary);
+            font-size: 2rem;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-light);
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Bouton de thème */
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--text);
+            cursor: pointer;
+            font-size: 1.2rem;
+            margin-left: 1rem;
+            padding: 0.5rem;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center; 
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            background: rgba(74, 111, 165, 0.1);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 10% 5%;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            text-align: left; /* Alignement à gauche */
+            padding-left: 2rem; /* Marge à gauche pour décaler */
+            margin-right: auto; /* S'assurer que le contenu ne déborde pas à droite */
+            z-index: 2;
+        }
+
+        .hero h2 {
+            font-size: clamp(2rem, 5vw, 4rem);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero h2 span {
+            color: var(--primary);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            max-width: 600px;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 2rem;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            justify-content: center;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 4px 15px rgba(74, 111, 165, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-light);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(74, 111, 165, 0.4);
+        }
+
+        .btn-secondary {
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            background: transparent;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(74, 111, 165, 0.1);
+            transform: translateY(-3px);
+        }
+
+        .hero-image {
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            opacity: 0.9;
+            margin: 2rem auto 0;
+            transition: transform 0.5s ease;
+        }
+
+        .hero-image:hover {
+            transform: scale(1.05);
+        }
+
+        /* Sections communes */
+        section {
+            padding: 6rem 5%;
+            position: relative;
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+
+        .section-spacing {
+            padding: 6rem 5%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            display: inline-block;
+            position: relative;
+            color: var(--text);
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+
+        /* Section À propos */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-image {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            width: 66.67%; /* Aligner avec la taille de l'image */
+            max-width: 400px; /* Limiter la largeur */
+            aspect-ratio: 1 / 1; /* Rapport d'aspect pour rogner proprement */
+        }
+
+        .about-image img {
+            width: 100%; /* Remplir le conteneur */
+            height: 100%; /* Remplir le conteneur */
+            object-fit: cover; /* Rogner l'image pour remplir sans déformer */
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .about-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+
+        .skills {
+            margin-top: 2rem;
+        }
+
+        .skill-category {
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-category h4 {
+            margin-bottom: 0.5rem;
+            color: var(--primary-light);
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .skill-tag {
+            background: rgba(74, 111, 165, 0.2);
+            color: var(--primary-light);
+            padding: 0.3rem 1rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            border: 1px solid rgba(74, 111, 165, 0.3);
+        }
+
+        /* Section Projets */
+        .projects-grid {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .project-card {
+            flex: 0 1 350px;
+            background: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(74, 111, 165, 0.2);
+            border: 1px solid rgba(74, 111, 165, 0.3);
+        }
+
+        .project-image {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .project-card:hover .project-image img {
+            transform: scale(1.1);
+        }
+
+        .project-info {
+            padding: 1.5rem;
+        }
+
+        .project-info h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .project-info p {
+            margin-bottom: 1rem;
+            opacity: 0.8;
+            font-size: 0.95rem;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-tag {
+            background: rgba(74, 111, 165, 0.1);
+            color: var(--primary-light);
+            padding: 0.2rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .project-links a {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            color: var(--text);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .project-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Section Certifications */
+        .certifications-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .certification-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .certification-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .certification-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .certification-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .certification-icon {
+            font-size: 2rem;
+            color: var(--primary);
+        }
+
+        .certification-title {
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        .certification-meta {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 1rem;
+        }
+
+        .certification-description {
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .certification-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .certification-tag {
+            background: rgba(74, 111, 165, 0.2);
+            color: var(--primary-light);
+            padding: 0.3rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+        }
+
+        /* Section Veille Technologique */
+        .veille-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .veilleintro {
+            text-align: center;
+            margin-bottom: 3rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .veille-content {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .veille-item {
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .veille-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .veille-item h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .veille-meta {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        .veille-item p {
+            margin-bottom: 1rem;
+        }
+
+        .veille-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            transition: color 0.3s ease;
+        }
+
+        .veille-link:hover {
+            color: var(--primary-light);
+        }
+
+        /* Section Contact */
+        .contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+        }
+
+        .contact-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            width: 100%;
+        }
+
+        .contact-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .contact-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .contact-card p {
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(74, 111, 165, 0.1);
+            color: var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .contact-form {
+            flex: 1;
+            min-width: 300px;
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: var(--text);
+            font-family: inherit;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .submit-btn:hover {
+            background: var(--primary-light);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(74, 111, 165, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--footer-bg);
+            padding: 3rem 5%;
+            text-align: center;
+            border-top: 1px solid rgba(74, 111, 165, 0.2);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            text-align: left;
+        }
+
+        .footer-column h3 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-column p, .footer-column a {
+            opacity: 0.8;
+            margin-bottom: 0.8rem;
+            display: block;
+            transition: opacity 0.3s ease;
+        }
+
+        .footer-column a {
+            color: var(--text);
+            text-decoration: none;
+        }
+
+        .footer-column a:hover {
+            opacity: 1;
+            color: var(--primary);
+        }
+
+        .footer-bottom {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        /* Modale de projet */
+        .project-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .project-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: var(--card-bg);
+            border-radius: 15px;
+            width: 90%;
+            max-width: 900px;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 2rem;
+            position: relative;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+
+        .project-modal.active .modal-content {
+            transform: scale(1);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            color: var(--text);
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close-modal:hover {
+            color: var(--accent);
+        }
+
+        .modal-header {
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .modal-header h2 {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-header .project-meta {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .modal-body {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .modal-images {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .modal-images img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-images img:hover {
+            transform: scale(1.02);
+        }
+
+        .modal-details h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .modal-details p {
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .modal-features {
+            margin-bottom: 2rem;
+        }
+
+        .modal-features h4 {
+            color: var(--primary-light);
+            margin-bottom: 0.8rem;
+        }
+
+        .modal-features ul {
+            list-style-type: none;
+        }
+
+        .modal-features li {
+            margin-bottom: 0.5rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .modal-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+
+        .modal-technologies {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .modal-tech-tag {
+            background: rgba(74, 111, 165, 0.2);
+            color: var(--primary-light);
+            padding: 0.3rem 1rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            border: 1px solid rgba(74, 111, 165, 0.3);
+        }
+
+        .modal-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .modal-links a {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .modal-links a:first-child {
+            background: var(--primary);
+            color: white;
+        }
+
+        .modal-links a:first-child:hover {
+            background: var(--primary-light);
+            transform: translateY(-3px);
+        }
+
+        .modal-links a:last-child {
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .modal-links a:last-child:hover {
+            background: rgba(74, 111, 165, 0.1);
+            transform: translateY(-3px);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .animate {
+            animation-duration: 1s;
+            animation-fill-mode: both;
+        }
+
+        .fade-in {
+            animation-name: fadeIn;
+        }
+
+        .slide-up {
+            animation-name: slideUp;
+        }
+
+        .float {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+        .delay-4 { animation-delay: 0.8s; }
+
+        /* Responsive */
+        @media (min-width: 992px) {
+            .hero {
+                flex-direction: row;
+                text-align: left;
+            }
+
+            .hero-image {
+                position: absolute;
+                right: 5%;
+                width: 40%;
+                max-width: 600px;
+                margin: 0;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .about-content,
+            .contact-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .contact-row {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-form {
+                width: 100%;
+            }
+
+            .modal-body {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-images {
+                order: 2;
+            }
+
+            .modal-details {
+                order: 1;
+            }
+
+            .about-image {
+                width: 100%; /* Ajuster pour les petits écrans */
+                max-width: 300px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                height: 100vh;
+                background: var(--secondary);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 2rem;
+                transition: right 0.3s ease;
+                z-index: 1000;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+                z-index: 1001;
+            }
+
+            .theme-toggle {
+                position: absolute;
+                right: 60px;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+
+            .projects-grid {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .hero {
+                padding-top: 8rem;
+            }
+
+            .modal-links {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-btns {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            section {
+                padding: 4rem 5%;
+            }
+
+            .modal-content {
+                padding: 1.5rem;
+            }
+
+            .modal-header h2 {
+                font-size: 1.5rem;
+            }
+        } 
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="logo">
+            <i class="fas fa-code logo-icon"></i>
+            <h1>RIBEIRO William</h1>
+        </div>
+        
+        <nav>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="nav-links" id="navLinks">
+                <a href="#accueil" class="active">Accueil</a>
+                <a href="#apropos">À propos</a>
+                <a href="#projets">Projets</a>
+                <a href="#certifications">Certifications</a>
+                <a href="#veille">Veille techno</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">
+                <i class="fas fa-moon"></i>
+                <i class="fas fa-sun" style="display: none;"></i>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="accueil">
+        <div class="hero-content animate slide-up">
+            <h2>Bonjour, bienvenue sur mon Portfolio</h2>
+            <p>Étudiant en BTS SIO (Services Informatiques aux Organisations) option SISR, passionné par l'informatique et les jeux vidéos, vous trouverez l'ensemble des différentes réalisations que j'ai pu effectuer durant mes années de BTS SIO.</p>
+            <div class="hero-btns">
+                <a href="#projets" class="btn btn-primary">
+                    <i class="fas fa-eye"></i> Tableau de synthèse des réalisation en millieu professionnelles
+                </a>
+                <a href="#contact" class="btn btn-secondary">
+                    <i class="fas fa-paper-plane"></i> Me contacter
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- À propos Section -->
+    <section id="apropos" class="section-spacing animate slide-up delay-2">
+        <div class="section-title">
+            <h2>À propos de moi</h2>
+        </div>
+        <div class="container">
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1571171637578-41bc2dd41cd2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="RIBEIRO William">
+                </div>
+                <div class="about-text">
+                    <a href="https://choisirleservicepublic.gouv.fr/employeurs/ministere-des-armees/">
+                <h3>Actuellement</h3>
+                    <p>Actuellement en BTS SIO option SISR (Solutions d'infrastructure, systèmes et réseaux), j’effectue mon alternance depuis décembre 2024 au ministère des Armées en tant que CORSIC (Correspondant en Systèmes d’Information et de Communication). Je me spécialise dans le support utilisateur, domaine qui me permet de développer mes compétences techniques tout en étant au contact direct des utilisateurs. Passionné par les nouvelles technologies, j’aime apprendre continuellement et mettre en pratique mes connaissances à travers divers projets concrets.</p>
+                    <p>Mon objectif est de continuer à développer mes compétences en gestion d'infrastructures et en sécurité des systèmes d'information.</p>
+                <h3>Alternance au Ministère des armées</h3>
+                    <p>En tant que CORSIC, mon travail consiste à rester constamment à l’écoute des besoins et des difficultés rencontrées par les utilisateurs. J’interviens aussi bien sur des problématiques mineures que sur des incidents plus critiques pouvant impacter le bon fonctionnement du système d’information.
+                        Mes missions incluent le diagnostic et la résolution de problèmes liés aux équipements informatiques (ordinateurs, périphériques, réseau) ainsi qu’à l’infrastructure logicielle. Je veille également à la bonne configuration et au bon fonctionnement des systèmes de proxy afin de garantir un accès sécurisé et contrôlé aux ressources réseau et à Internet.</p>
+                    <p>Une part importante de mon rôle concerne la sécurité du système d’information. Je participe à la prévention des risques informatiques en surveillant les anomalies, en appliquant les bonnes pratiques de cybersécurité et en intervenant rapidement en cas de suspicion de menace ou de faille de sécurité.
+                        Je suis aussi amené à accompagner et conseiller les utilisateurs dans l’utilisation des outils informatiques, en leur apportant des solutions adaptées et en leur expliquant les procédures à suivre pour éviter certains problèmes à l’avenir. Mon objectif est de garantir la continuité du service informatique, la protection des données et le bon fonctionnement de l’environnement numérique de l’organisation.</p>
+
+                    <div class="skills">
+                        <div class="skill-category">
+                            <h4>Support</h4>
+                            <div class="skill-tags">
+                                <span class="skill-tag">Intervention</span>
+                                <span class="skill-tag">Gestion</span>
+                                <span class="skill-tag">Prévention</span>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-category">
+                            <h4>Ministère des armées</h4>
+                            <div class="skill-tags">
+                                <span class="skill-tag">Annudef</span>
+                                <span class="skill-tag">DIADEM</span>
+                                <span class="skill-tag">SMOBI</span>
+                                <span class="skill-tag">ACID</span>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-category">
+                            <h4>Outils & Méthodes</h4>
+                            <div class="skill-tags">
+                                <span class="skill-tag">Windows Server</span>
+                                <span class="skill-tag">Linux</span>
+                                <span class="skill-tag">GLPI</span>
+                                <span class="skill-tag">PowerShell</span>
+                                <span class="skill-tag">Wireshark</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <a href="#" class="btn btn-primary" style="margin-top: 1.5rem;">
+                        <i class="fas fa-download"></i> Télécharger mon CV
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projets Section -->
+    <section id="projets" class="section-spacing animate slide-up delay-3">
+        <div class="section-title">
+            <h2>Mes projets E6</h2>
+        </div>
+        <div class="container">
+            <div class="projects-grid">
+                <!-- Projet 1 -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://www.minitool.com/images/uploads/lib/2020/04/active-directory/active-directory-1.jpg" alt="Active Directory">
+                    </div>
+                    <div class="project-info">
+                        <h3>Création d'un Active Directory sous Windows Server 2019 avec GPO</h3>
+                        <p>Mise en place d’un Active Directory sous Windows Server 2019. Pour répondre à ce besoin, j'ai mis en place un contrôleur de domaine avec les services AD-DS, DNS, GPO, DHCP afin de centraliser les utilisateurs et les ressources informatiques.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">Windows Server</span>
+                            <span class="project-tag">Active Directory</span>
+                            <span class="project-tag">GPO</span>
+                            <span class="project-tag">PowerShell</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="view-project" data-project="1">
+                                <i class="fas fa-external-link-alt"></i> Voir la documentation
+                                <i class="fas fa-external-link-alt"></i> Voir la production
+                            </a>
+                            <a href="#"> 
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Projet 2 -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://blog.digitalcook.fr/wp-content/uploads/2021/04/GLPI.webp" alt="GLPI Ticketing">
+                    </div>
+                    <div class="project-info">
+                        <h3>Mise en place de l'outil de ticketing GLPI sous Linux</h3>
+                        <p>Implémentation d'une solution de ticketing et de gestion de parc informatique avec GLPI sous Linux CentOS, intégrant des workflows personnalisés et des notifications.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">Linux</span>
+                            <span class="project-tag">GLPI</span>
+                            <span class="project-tag">MySQL</span>
+                            <span class="project-tag">Apache</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="view-project" data-project="2">
+                                <i class="fas fa-external-link-alt"></i> Voir la documentation
+                                <i class="fas fa-external-link-alt"></i> Voir la production
+                            </a>
+                            <a href="#">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+      <!-- Projets Section -->
+    <section id="projets" class="section-spacing animate slide-up delay-3">
+        <div class="section-title">
+            <h2>Mes projets E5</h2>
+        </div>
+        <div class="container">
+            <div class="projects-grid">
+                <!-- Projet 1 -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://www.infinylink.fr/wp-content/uploads/2021/11/modernisation-infrastructure-informatique.jpg" alt="Active Directory Windows Server">
+                    </div>
+                    <div class="project-info">
+                        <h3>Mission 1 : Gestion de Parc informatique via GLPI</h3>
+                        <p>La gestion de parc informatique via GLPI consiste à utiliser cet outil pour inventorier, suivre et administrer l’ensemble des équipements informatiques d’une organisation (ordinateurs, serveurs, imprimantes, logiciels, réseaux, etc.).</p>
+                        <div class="project-tags">
+                            <span class="project-tag">Linux</span>
+                            <span class="project-tag">MariaDB</span>
+                            <span class="project-tag">MySQL</span>
+                            <span class="project-tag">Apache</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://chat.deepseek.com/a/chat/s/a9a81fc7-ae52-4feb-b6d3-0013ecb9cf52" class="view-project" data-project="3">
+                                <i class="fas fa-external-link-alt"></i> Voir la documentation
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Projet 2 -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://tse4.mm.bing.net/th/id/OIP.ZkzZrn8kn853Z3osk_z9GAHaDt?rs=1&pid=ImgDetMain" alt="GLPI Ticketing">
+                    </div>
+                    <div class="project-info">
+                        <h3>Mission 2 : PLACEHOLDER </h3>
+                        <p>PLACEHOLDER</p>
+                        <div class="project-tags">
+                            <span class="project-tag"></span>
+                            <span class="project-tag"></span>
+                            <span class="project-tag"></span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="view-project" data-project="4">
+                                <i class="fas fa-external-link-alt"></i> Voir la documentation
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Projet 3 -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://www.sgit-consulting.ch/wp-content/uploads/2023/02/Depositphotos_421833194_XL-1024x761.jpg">
+                    </div>
+                    <div class="project-info">
+                        <h3>Mission 3 : PLACEHOLDER</h3>
+                        <p>PLACEHOLDER</p>
+                        <div class="project-tags">
+                            <span class="project-tag"></span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="view-project" data-project="5">
+                                <i class="fas fa-external-link-alt"></i> Voir la documentation
+                            </a>
+                        </div>
+                    </div>
+                </div>
+              <!-- Projet 4 -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://bluebearsit.com/wp-content/uploads/2019/06/Support_infog%C3%A9rance_Plan-de-travail-1.png">
+                    </div>
+                    <div class="project-info">
+                        <h3>Mission 4 : Support aux utilisateurs</h3>
+                        <p>Participation au support utilisateur en répondant aux demandes d’assistance, en résolvant les incidents courants et en accompagnant les utilisateurs dans l’utilisation de leur environnement informatique. Cette activité permet de maintenir un bon niveau de service et de renforcer la satisfaction des utilisateurs.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">Diadem</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="view-project" data-project="6">
+                                <i class="fas fa-external-link-alt"></i> Voir la documentation
+                            </a>
+                        </div>
+                    </div>
+                </div>
+              <!-- Projet 5 -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://www.itespresso.fr/wp-content/uploads/2013/04/ibm_urbancode.jpg" alt="GLPI Ticketing">
+                    </div>
+                    <div class="project-info">
+                        <h3>Mission 5 : Gestion du Parc informatique du MINARM</h3>
+                        <p>PLACEHOLDER</p>
+                        <div class="project-tags">
+                            <span class="project-tag"></span>
+                            <span class="project-tag"></span>
+                            <span class="project-tag"></span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="view-project" data-project="7">
+                                <i class="fas fa-external-link-alt"></i> Voir la documentation
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Projet 6 -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://www.itespresso.fr/wp-content/uploads/2013/04/ibm_urbancode.jpg" alt="GLPI Ticketing">
+                    </div>
+                    <div class="project-info">
+                        <h3>Mission 6 : PLACEHOLDER</h3>
+                        <p>PLACEHOLDER</p>
+                        <div class="project-tags">
+                            <span class="project-tag"></span>
+                            <span class="project-tag"></span>
+                            <span class="project-tag"></span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="view-project" data-project="7">
+                                <i class="fas fa-external-link-alt"></i> Voir la documentation
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+    </section>
+
+    <!-- Certification Section -->
+    <section id="certifications" class="section-spacing animate slide-up delay-4">
+        <div class="section-title">
+            <h2>Mes Certifications</h2>
+        </div>
+        <div class="container">
+            <div class="certifications-container">
+                <div class="certification-grid">
+                    <!-- Certification 1 -->
+<div class="certification-card">
+    <div class="certification-header">
+        <i class="fas fa-shield-alt certification-icon"></i>
+        <div class="certification-title">Certification Cybersécurité</div>
+    </div>
+    <div class="certification-body">
+        <div class="certification-meta">
+            <span><i class="far fa-calendar-alt"></i> Juin 2025</span>
+            <span><i class="fas fa-award"></i> CSSI</span>
+        </div>
+        <div class="certification-description">
+       La certification de CSSI (Correspondant de la Sécuriter des Système Informatique) est un certification de prévention et d'action sur les SI en cas de problème ou d'attaque.
+        </div>
+        <div class="certification-skills">
+            <h4>Compétences validées :</h4>
+            <div class="certification-tags">
+                <span class="certification-tag">Sécurité réseau</span>
+                <span class="certification-tag">Cryptographie</span>
+                <span class="certification-tag">Gestion des vulnérabilités</span>
+                <span class="certification-tag">Analyse des risques</span>
+                <span class="certification-tag">Prévention des riques</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+                    <!-- Certification 2 -->
+                    <div class="certification-card">
+                        <div class="certification-header">
+                            <i class="fas fa-network-wired certification-icon"></i>
+                            <div class="certification-title">Certification Réseaux</div>
+                        </div>
+                        <div class="certification-body">
+                            <div class="certification-meta">
+                                <span><i class="far fa-calendar-alt"></i> Mars 2025</span>
+                                <span><i class="fas fa-award"></i> Cisco CCNA</span>
+                            </div>
+                            <div class="certification-description">
+                                Certification Cisco Certified Network Associate qui atteste des compétences en installation, configuration, 
+                                exploitation et dépannage des réseaux de taille moyenne, y compris l'implémentation et la vérification des connexions.
+                            </div>
+                            <div class="certification-skills">
+                                <h4>Compétences validées :</h4>
+                                <div class="certification-tags">
+                                    <span class="certification-tag">Routage et commutation</span>
+                                    <span class="certification-tag">Protocoles réseau</span>
+                                    <span class="certification-tag">Sécurité réseau</span>
+                                    <span class="certification-tag">IPv4/IPv6</span>
+                                    <span class="certification-tag">WAN technologies</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Certification 3 -->
+                    <div class="certification-card">
+                        <div class="certification-header">
+                            <i class="fab fa-microsoft certification-icon"></i>
+                            <div class="certification-title">Certification Microsoft</div>
+                        </div>
+                        <div class="certification-body">
+                            <div class="certification-meta">
+                                <span><i class="far fa-calendar-alt"></i> Juin 2025</span>
+                                <span><i class="fas fa-award"></i> Microsoft Azure Administrator        
+                            </div>
+                            <div class="certification-description">
+                                Certification qui valide les compétences en implémentation, gestion et surveillance des environnements Microsoft Azure, 
+                                y compris les services de calcul, de stockage, de réseau et de sécurité.
+                            </div>
+                            <div class="certification-skills">
+                                <h4>Compétences validées :</h4>
+                                <div class="certification-tags">
+                                    <span class="certification-tag">Azure Virtual Machines</span>
+                                    <span class="certification-tag">Azure Active Directory</span>
+                                    <span class="certification-tag">Stockage Azure</span>
+                                    <span class="certification-tag">Réseau virtuel Azure</span>
+                                    <span class="certification-tag">Sécurité Azure</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                                        <!-- Certification 4 -->
+                    <div class="certification-card">
+                        <div class="certification-header">
+                            <i class="fas fa-shield-alt certification-icon"></i>
+                            <div class="certification-title">Certification AEL</div>
+                        </div>
+                        <div class="certification-body">
+                            <div class="certification-meta">
+                                <span><i class="far fa-calendar-alt"></i> Juillet 2025</span>
+                                <span><i class="fas fa-award"></i> Autorité d'Enregistrement Local       
+                            </div>
+                            <div class="certification-description">
+                                Certification qui valide l'utilisation, création et distribution de clé de cryptage sécuriser avec ajout de la personne sur l'Annuaire du logiciel.
+                            </div>
+                            <div class="certification-skills">
+                                <h4>Compétences validées :</h4>
+                                <div class="certification-tags">
+                                    <span class="certification-tag">Création Clé Cryptage</span>
+                                    <span class="certification-tag">Distribution clé Cryptage</span>
+                                    <span class="certification-tag">Enregistrement Utilisateur</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Veille Technologique Section -->
+    <section id="veille" class="section-spacing animate slide-up delay-4">
+        <div class="section-title">
+            <h2>Veille technologique</h2>
+        </div>
+        <div class="container">
+            <div class="veille-container">
+                <div class="veille-intro">
+                    <p>Dans le cadre de ma formation et par passion personnelle, je mène une veille technologique active sur les dernières actualité sur Intelligence Artificielle et les jeux vidéos mais aussi la cybersécurité.</p>
+                </div>
+                
+                <div class="veille-content">
+                    <!-- Article 1 -->
+                    <div class="veille-item">
+                        <h3>Intelligence Artificielle</h3>
+                        <div class="veille-meta">
+                            <span><i class="far fa-calendar-alt"></i> 15 mars 2025</span>
+                            <span><i class="fas fa-tag"></i> IA</span>
+                        </div>
+                        <p>Découvrez les nouvelles actualités concernant les IA.</p>
+                        <a href="https://www.google.fr/search?q=Inteligence+artificielle+actualit%C3%A9s" 
+                           class="veille-link" 
+                           target="_blank" 
+                           rel="noopener noreferrer">
+                            Lire les news ici <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                    
+                    <!-- Article 2 -->
+                    <div class="veille-item">
+                        <h3>Cybersécurité</h3>
+                        <div class="veille-meta">
+                            <span><i class="far fa-calendar-alt"></i> 2 mai 2023</span>
+                            <span><i class="fas fa-tag"></i> Cybersécurité</span>
+                        </div>
+                        <p>Découvrez les nouvelles actualités concernant la cybersécurité.</p>
+                        <a href="https://www.google.fr/search?q=cybersecurit%C3%A9+actualit%C3%A9s&tbm=nws" 
+                           class="veille-link" 
+                           target="_blank" 
+                           rel="noopener noreferrer">
+                            Lire les news ici <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                    
+                    <!-- Article 3 -->
+                    <div class="veille-item">
+                        <h3>L'essor des architectures micro-frontend</h3>
+                        <div class="veille-meta">
+                            <span><i class="far fa-calendar-alt"></i> 2 juillet 2019</span>
+                            <span><i class="fas fa-tag"></i> Architecture</span>
+                        </div>
+                        <p>Comment l’intelligence artificielle améliore la sécurité, sur le web et en vrai.</p>
+                        <a href="https://www.lebigdata.fr/intelligence-artificielle-securite" class="veille-link" target="_blank" rel="noopener noreferrer">
+                            Lire l'article <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section-spacing animate slide-up delay-4">
+        <div class="section-title">
+            <h2>Contactez-moi</h2>
+        </div>
+        <div class="container">
+            <div class="contact-container">
+                <div class="contact-row">
+                    <div class="contact-card">
+                        <h3><i class="fas fa-envelope"></i> Email</h3>
+                        <p>test@gmail.com</p>
+                        <a href="mailto:r.letondeur@laposte.net" class="btn btn-secondary">
+                            <i class="fas fa-paper-plane"></i> Envoyer un email
+                        </a>
+                    </div>
+                    <div class="contact-card">
+                        <h3><i class="fas fa-phone-alt"></i> Téléphone</h3>
+                        <p>+33 7 ** ** ** **</p>
+                        <a href="tel:+33661566026" class="btn btn-secondary">
+                            <i class="fas fa-phone-alt"></i> Appeler
+                        </a>
+                    </div>
+                    <div class="contact-card">
+                        <h3><i class="fas fa-share-alt"></i> Réseaux sociaux</h3>
+                        <p>Retrouvez-moi sur les réseaux professionnels</p>
+                        <div class="social-links">
+                            <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="https://github.com/" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                            <a href="https://twitter.com/" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Nom complet</label>
+                            <input type="text" id="name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Sujet</label>
+                            <input type="text" id="subject" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" class="form-control" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-paper-plane"></i> Envoyer le message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>RIBEIRO William</h3>
+                    <p>Étudiant en BTS SIO option SISR, passionné par les jeux vidéos et les nouvelles technologies.</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Liens rapides</h3>
+                    <a href="#accueil">Accueil</a>
+                    <a href="#apropos">À propos</a>
+                    <a href="#projets">Projets</a>
+                    <a href="#veille">Veille techno</a>
+                    <a href="#contact">Contact</a>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <a href="mailto:test@gmail.com">test@gmail.com</a>
+                    <a href="tel:+337********">+33 7 ** ** ** **</a>
+                    <p>Paris, France</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>© 2025 RIBEIRO William. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modales des projets -->
+    <!-- Modale Projet 1 -->
+    <div class="project-modal" id="project-modal-1">
+        <div class="modal-content">
+            <button class="close-modal">×</button>
+            <div class="modal-header">
+                <h2>Création d'un Active Directory sous Windows Server 2022</h2>
+                <div class="project-meta">
+                    <span><i class="far fa-calendar-alt"></i> Janvier 2023</span>
+                    <span><i class="fas fa-tag"></i> Infrastructure réseau</span>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="modal-images">
+                    <img src="ChatGPT Image 7 avr. 2025, 10_01_54.png" alt="Capture d'écran du projet">
+                    <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="Détails techniques">
+                </div>
+                <div class="modal-details">
+                    <h3>Description du projet</h3>
+                    <p>Ce projet consistait à mettre en place un Active Directory complet sous Windows Server 2019 pour une entreprise fictive. L'objectif était de centraliser la gestion des utilisateurs, des ordinateurs et des politiques de sécurité.</p>
+                    
+                    <div class="modal-features">
+                        <h4>Fonctionnalités implémentées</h4>
+                        <ul>
+                            <li>Création d'un domaine Active Directory avec DNS intégré</li>
+                            <li>Configuration des Unités Organisationnelles (OU) par services</li>
+                            <li>Mise en place des stratégies de groupe (GPO)</li>
+                            <li>Déploiement des profils itinérants</li>
+                            <li>Configuration des partages réseau et des permissions</li>
+                            <li>Automatisation des tâches avec PowerShell</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="modal-technologies">
+                        <span class="modal-tech-tag">Windows Server 2019</span>
+                        <span class="modal-tech-tag">Active Directory</span>
+                        <span class="modal-tech-tag">DNS</span>
+                        <span class="modal-tech-tag">GPO</span>
+                        <span class="modal-tech-tag">PowerShell</span>
+                    </div>
+                    
+                    <div class="modal-links">
+                        <a href="#" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Voir la documentation
+                        </a>
+                        <a href="#" target="_blank">
+                            <i class="fab fa-github"></i> Voir les scripts
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modale Projet 2 -->
+    <div class="project-modal" id="project-modal-2">
+        <div class="modal-content">
+            <button class="close-modal">×</button>
+            <div class="modal-header">
+                <h2>Mise en place de GPO sur Windows Server 2019</h2>
+                <div class="project-meta">
+                    <span><i class="far fa-calendar-alt"></i> Mars 2023</span>
+                    <span><i class="fas fa-tag"></i> Gestion de parc</span>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="modal-images">
+                    <img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1469&q=80" alt="Capture d'écran du projet">
+                    <img src="https://images.unsplash.com/photo-1544197150-bc3f308a029a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="Détails techniques">
+                </div>
+                <div class="modal-details">
+                    <h3>Description du projet</h3>
+                    <p>Implémentation de GPO pour bloquer l'accès à l'invite de commande a toute les personnes hors du service IT.</p>
+                    
+                    <div class="modal-features">
+                        <h4>Fonctionnalités implémentées</h4>
+                        <ul>
+                            <li>Installation et configuration des GPO</li>
+                            <li>Bloquer l'accès de l'invite de commande</li>
+                            <li>Mise en place d'un bypass pour le service IT</li>
+                            <li>Mappage des GPO</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="modal-technologies">
+                        <span class="modal-tech-tag">CentOS 8</span>
+                        <span class="modal-tech-tag">GLPI</span>
+                        <span class="modal-tech-tag">MySQL</span>
+                        <span class="modal-tech-tag">Apache</span>
+                        <span class="modal-tech-tag">PHP</span>
+                    </div>
+                    
+                    <div class="modal-links">
+                        <a href="#" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Voir la documentation
+                        </a>
+                        <a href="#" target="_blank">
+                            <i class="fab fa-github"></i> Voir les scripts
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Gestion du thème
+        const themeToggle = document.getElementById('themeToggle');
+        const moonIcon = themeToggle.querySelector('.fa-moon');
+        const sunIcon = themeToggle.querySelector('.fa-sun');
+        
+        // Vérifier le thème stocké ou la préférence système
+        const currentTheme = localStorage.getItem('theme') || 
+                           (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+        
+        // Appliquer le thème au chargement
+        if (currentTheme === 'light') {
+            document.documentElement.setAttribute('data-theme', 'light');
+            moonIcon.style.display = 'none';
+            sunIcon.style.display = 'block';
+        } else {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            moonIcon.style.display = 'block';
+            sunIcon.style.display = 'none';
+        }
+        
+        // Basculer entre les thèmes
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            
+            if (currentTheme === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'light');
+                localStorage.setItem('theme', 'light');
+                moonIcon.style.display = 'none';
+                sunIcon.style.display = 'block';
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+                moonIcon.style.display = 'block';
+                sunIcon.style.display = 'none';
+            }
+        });
+
+        // Animation au scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const animateElements = document.querySelectorAll('.animate');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animated');
+                        entry.target.style.animationPlayState = 'running';
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            animateElements.forEach(el => observer.observe(el));
+            
+            // Menu mobile
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const navLinks = document.getElementById('navLinks');
+            
+            mobileMenuBtn.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+                mobileMenuBtn.innerHTML = navLinks.classList.contains('active') ? 
+                    '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+            });
+            
+            // Fermer le menu au clic sur un lien
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', function() {
+                    if (navLinks.classList.contains('active')) {
+                        navLinks.classList.remove('active');
+                        mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                    }
+                });
+            });
+            
+            // Header scroll effect
+            const header = document.getElementById('header');
+            let lastScroll = 0;
+            
+            window.addEventListener('scroll', function() {
+                const currentScroll = window.pageYOffset;
+                
+                if (currentScroll <= 0) {
+                    header.classList.remove('hidden');
+                    return;
+                }
+                
+                if (currentScroll > lastScroll && !header.classList.contains('hidden')) {
+                    header.classList.add('hidden');
+                } else if (currentScroll < lastScroll && header.classList.contains('hidden')) {
+                    header.classList.remove('hidden');
+                }
+                
+                lastScroll = currentScroll;
+            });
+            
+            // Active link highlight
+            const sections = document.querySelectorAll('section');
+            const navItems = document.querySelectorAll('.nav-links a');
+            
+            window.addEventListener('scroll', function() {
+                let current = '';
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    
+                    if (pageYOffset >= (sectionTop - 300)) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                
+                navItems.forEach(item => {
+                    item.classList.remove('active');
+                    if (item.getAttribute('href') === `#${current}`) {
+                        item.classList.add('active');
+                    }
+                });
+            });
+            
+            // Form submission
+            const contactForm = document.getElementById('contactForm');
+            
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Message envoyé avec succès !');
+                contactForm.reset();
+            });
+
+            // Gestion des modales de projet
+            const viewProjectButtons = document.querySelectorAll('.view-project');
+            const projectModals = document.querySelectorAll('.project-modal');
+            const closeModalButtons = document.querySelectorAll('.close-modal');
+
+            viewProjectButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const projectId = this.getAttribute('data-project');
+                    const modal = document.getElementById(`project-modal-${projectId}`);
+                    modal.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+
+            closeModalButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    this.closest('.project-modal').classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                });
+            });
+
+            projectModals.forEach(modal => {
+                modal.addEventListener('click', function(e) {
+                    if (e.target === this) {
+                        this.classList.remove('active');
+                        document.body.style.overflow = 'auto';
+                    }
+                });
+            });
+
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    projectModals.forEach(modal => {
+                        if (modal.classList.contains('active')) {
+                            modal.classList.remove('active');
+                            document.body.style.overflow = 'auto';
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
